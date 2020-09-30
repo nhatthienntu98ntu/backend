@@ -14,8 +14,10 @@ export interface IUser extends Document {
     groupRoleIds: string[];
     addressIds: string[];
     pollResponseIds: string[];
-    statusId: string[];
+    statusId: string;
+    isDelete: boolean;
     blockedById: string;
+    deletedAt: Date;
     blockedAt: Date;
     createdAt: Date;
 }
@@ -79,6 +81,7 @@ export interface IRooms extends Document {
 export interface IGroupUsers extends Document {
     userId: string;
     groupId: string;
+    isDelete: boolean;
     createdAt: Date;
 }
 
@@ -86,7 +89,7 @@ export interface IGroupUsers extends Document {
 export interface IGroups extends Document {
     name: string;
     description: string;
-    isActive: boolean;
+    isDelete: boolean;
     createdById: string;
     createdAt: Date;
 }
@@ -294,4 +297,10 @@ export interface IUserLogin {
 export interface ITokenDecode {
     uid: string;
     groupRoleIds: string[];
+}
+
+//!IUserDelete
+export interface IUserDelete {
+    _idUser: string;
+    _idUserBlock: string;
 }

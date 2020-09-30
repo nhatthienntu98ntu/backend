@@ -1,15 +1,15 @@
 import { json } from 'body-parser';
 import { NextFunction, Request, Response } from 'express';
-import { IStatus } from '../../interfaces';
-import statusModel from '../../models/status.model';
-import { StatusService } from '../../services';
+import { IPermissions } from '../../interfaces';
+import permissionModel from '../../models/permission.model';
+import { PermissionService } from '../../services';
 
-export const getAllStatusController = async (
+export const getAllPermissionController = async (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
-    StatusService.getAllStatus().then(result => {
+    PermissionService.getAllPermissionService().then(result => {
         res.status(200).json({
             message: 'Request successfully',
             Response: result,
@@ -17,17 +17,16 @@ export const getAllStatusController = async (
     });
 };
 
-export const addStatusController = async (
+export const AddPermissionController = async (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
-    const status = {
+    const permission = {
         name: req.body.name,
         description: req.body.description,
-    } as IStatus;
-
-    StatusService.addStatusService(status)
+    } as IPermissions;
+    PermissionService.addPermissionService(permission)
         .then(result => {
             res.status(200).json({
                 message: 'Add successfully',
@@ -39,17 +38,17 @@ export const addStatusController = async (
         });
 };
 
-export const updateStatusController = async (
+export const UpdatePermissionController = async (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
-    const status = {
+    const permission = {
         _id: req.params._id,
         name: req.body.name,
         description: req.body.description,
-    } as IStatus;
-    StatusService.updateStatusService(status)
+    } as IPermissions;
+    PermissionService.updatePermissionService(permission)
         .then(result => {
             return res.status(200).json({
                 message: 'Update successful',
@@ -61,12 +60,12 @@ export const updateStatusController = async (
         });
 };
 
-export const deleteStatusController = async (
+export const DeletePermissionController = async (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
-    StatusService.deleteStatusService(req.params._id).then(result => {
+    PermissionService.deletePermissionService(req.params._id).then(result => {
         res.status(200).json({
             message: 'Delete succesfully',
             Response: result,

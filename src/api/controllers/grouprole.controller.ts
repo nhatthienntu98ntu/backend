@@ -1,33 +1,31 @@
 import { json } from 'body-parser';
 import { NextFunction, Request, Response } from 'express';
-import { IStatus } from '../../interfaces';
-import statusModel from '../../models/status.model';
-import { StatusService } from '../../services';
+import { IGroupRoles } from '../../interfaces';
+import { GroupRoleService } from '../../services';
 
-export const getAllStatusController = async (
+export const getAllGroupRoleController = async (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
-    StatusService.getAllStatus().then(result => {
+    GroupRoleService.getAllGroupRoleService().then(result => {
         res.status(200).json({
             message: 'Request successfully',
             Response: result,
         });
     });
 };
-
-export const addStatusController = async (
+export const AddGroupRoleController = async (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
-    const status = {
+    const grouprole = {
         name: req.body.name,
         description: req.body.description,
-    } as IStatus;
-
-    StatusService.addStatusService(status)
+        roleIds: req.body.roleIds,
+    } as IGroupRoles;
+    GroupRoleService.addGroupRoleService(grouprole)
         .then(result => {
             res.status(200).json({
                 message: 'Add successfully',
@@ -38,18 +36,18 @@ export const addStatusController = async (
             next(err);
         });
 };
-
-export const updateStatusController = async (
+export const UpdateGroupRoleController = async (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
-    const status = {
+    const grouprole = {
         _id: req.params._id,
         name: req.body.name,
         description: req.body.description,
-    } as IStatus;
-    StatusService.updateStatusService(status)
+        roleIds: req.body.roleIds,
+    } as IGroupRoles;
+    GroupRoleService.updateGroupRoleService(grouprole)
         .then(result => {
             return res.status(200).json({
                 message: 'Update successful',
@@ -60,13 +58,12 @@ export const updateStatusController = async (
             next(err);
         });
 };
-
-export const deleteStatusController = async (
+export const DeleteGroupRoleController = async (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
-    StatusService.deleteStatusService(req.params._id).then(result => {
+    GroupRoleService.deleteGroupRoleService(req.params._id).then(result => {
         res.status(200).json({
             message: 'Delete succesfully',
             Response: result,

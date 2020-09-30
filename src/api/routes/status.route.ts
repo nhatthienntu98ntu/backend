@@ -11,29 +11,22 @@ router.get(
     StatusController.getAllStatusController
 );
 
-router.get(
-    '/:_id',
-    // AuthMiddleware.checkToken,
-    // AuthMiddleware.checkPermission(['Read']),
-    StatusController.getStatusByIdController
-);
-
 router.post(
-    '/addStatus',
+    '/add',
     // AuthMiddleware.checkToken,
     // AuthMiddleware.checkPermission(['Read']),
     StatusController.addStatusController
 );
 
-router.post(
-    '/updateStatus',
+router.put(
+    '/update/:_id',
     // AuthMiddleware.checkToken,
     // AuthMiddleware.checkPermission(['Read']),
     StatusController.updateStatusController
 );
 
 router.delete(
-    '/deleteStatus',
+    '/delete/:_id',
     // AuthMiddleware.checkToken,
     // AuthMiddleware.checkPermission(['Read']),
     StatusController.deleteStatusController

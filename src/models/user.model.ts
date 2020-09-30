@@ -15,21 +15,23 @@ const userSchema = new Schema({
     avatar: { type: String, required: true, default: null },
     gender: { type: Boolean, required: true, default: null },
     birthday: { type: Date, required: true, default: null },
-    phones: [{ type: String, required: true, default: [] }],
-    descriptionBlocked: { type: String, required: true, default: null },
+    isDelete: { type: Boolean, required: false, default: false },
+    phones: [{ type: String, required: true, default: null }],
+    descriptionBlocked: { type: String, required: false, default: null },
     groupRoleIds: [
-        { type: String, required: true, default: [], ref: 'GroupRoles' },
+        { type: String, required: false, default: null, ref: 'grouproles' },
     ],
     addressIds: [
-        { type: String, required: true, default: [], ref: 'Addresses' },
+        { type: String, required: true, default: null, ref: 'addresses' },
     ],
     pollResponseIds: [
-        { type: String, required: false, default: [], ref: 'PollResponses' },
+        { type: String, required: false, default: null, ref: 'pollresponses' },
     ],
-    statusId: [{ type: String, required: true, default: [], ref: 'status' }],
+    statusId: { type: String, required: false, default: null, ref: 'status' },
     blockedById: { type: String, required: false, default: null, ref: 'users' },
+    deletedAt: { type: Date, required: false, default: null },
     blockedAt: { type: Date, required: false, default: null },
-    createdAt: { type: Date, required: true, default: null },
+    createdAt: { type: Date, required: true, default: new Date() },
 });
 
 export default model<IUser>('users', userSchema);
